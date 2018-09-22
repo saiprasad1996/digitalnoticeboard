@@ -2,3 +2,5 @@
 /virtualenv/
 /staticfiles/
 /ui_template/
+/db.sqlite3
+/.idea/*
