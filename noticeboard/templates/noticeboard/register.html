@@ -1,0 +1,103 @@
+{% extends 'noticeboard/base.html' %}
+{% block register %}
+<main>
+    <section class="section section-shaped section-lg">
+        <div class="shape shape-style-1 bg-gradient-default">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container pt-lg-md">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card bg-secondary shadow border-0">
+
+                        <div class="card-body px-lg-5 py-lg-5">
+                            <div class="text-center text-muted mb-4">
+                                <small>Fill in the form to sign up</small>
+                            </div>
+                            <form role="form" method="post" action="{% url 'register' %}">{% csrf_token %}
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                        </div>
+                                        <input class="form-control" name="name" placeholder="Name" required type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" name="email" required
+                                               type="email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Password" name="password" required
+                                               type="password">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Designation" name="designation"
+                                               required type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="department" style="font-weight:bold;">Department</label>
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <select name="department" id="department" class="form-control">
+                                            {% for d in departments %}
+                                            <option value="{{d.department_id}}">{{d.department_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-control-alternative custom-checkbox">
+                                            <input class="custom-control-input" id="privacy_check"
+                                                   type="checkbox" required>
+                                            <label class="custom-control-label" for="privacy_check">
+                          <span>I agree with the
+                            <a target="_blank" href="{% url 'privacy' %}">Privacy Policy</a>
+                          </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!--<script type="text/javascript">-->
+<!--$(document).ready(function(){-->
+<!--$('#privacy_check').isChecked();-->
+<!--});-->
+
+<!--</script>-->
+{% endblock %}

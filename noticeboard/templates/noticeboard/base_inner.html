@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Digital Notice Board">
+    <meta name="author" content="Sai Prasad, Epsum Labs">
+    <title>Digital Notice board</title>
+    <!-- Favicon -->
+    <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Icons -->
+    <link href="{% static 'assets/vendor/nucleo/css/nucleo.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Argon CSS -->
+    <link type="text/css" href="{% static 'assets/css/argon.css' %}" rel="stylesheet">
+    <!--Normalize CSS-->
+    <link type="text/css" href="{% static 'assets/css/normalize.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<header class="header-global">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
+        <div class="container">
+            <a class="navbar-brand mr-lg-5" href="{% url 'index' %}">
+                <h5 style="color:white;font-weight: bold;">Digital Notice board</h5>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global"
+                    aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbar_global">
+                <div class="navbar-collapse-header">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="index.html">
+                                <img src="assets/img/brand/blue.png">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse"
+                                    data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
+                            <i class="ni ni-ui-04 d-lg-none"></i>
+                            <span class="nav-link-inner--text">Notice</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-xl">
+                            <div class="dropdown-menu-inner">
+                                <a href="{% url 'panel' %}" class="media d-flex align-items-center">
+                                    <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                                        <i class="ni ni-spaceship"></i>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <h6 class="heading text-primary mb-md-1">See Notices</h6>
+                                        <p class="description d-none d-md-inline-block mb-0">See and post new Notices to
+                                            the Digital Notice board</p>
+                                    </div>
+                                </a>
+                                <a href="#"
+                                   class="media d-flex align-items-center">
+                                    <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                                        <i class="ni ni-palette"></i>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <h6 class="heading text-primary mb-md-1">Approve Users</h6>
+                                        <p class="description d-none d-md-inline-block mb-0">Give and revoke access to
+                                            users to post notices on Digital Notice Board</p>
+                                    </div>
+                                </a>
+                                <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html"
+                                   class="media d-flex align-items-center">
+                                    <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                                        <i class="ni ni-ui-04"></i>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <h5 class="heading text-warning mb-md-1">Components</h5>
+                                        <p class="description d-none d-md-inline-block mb-0">Browse our 50 beautiful
+                                            handcrafted components offered in the Free version.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-toggle="dropdown" href="#" role="button">
+                            <i class="ni ni-collection d-lg-none"></i>
+                            <span class="nav-link-inner--text">More</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+                            <a href="{% url 'register' %}" class="dropdown-item">Add a new user</a>
+                            <a href="{% url 'privacy' %}" class="dropdown-item">Privacy Policy</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+
+                    <li class="nav-item d-none d-lg-block ml-lg-4">
+                        <a href="{% url 'logout' %}" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fa fa-cloud-download mr-2"></i>
+                </span>
+                            <span class="nav-link-inner--text">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+{% block profile %}
+{% endblock %}
+{% block feed %}
+{% endblock %}
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row row-grid align-items-center mb-5">
+            <div class="col-lg-6">
+                <h3 class="text-primary font-weight-light mb-2">Thank you for using Digital Notice Board!</h3>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-6">
+                <div class="copyright">
+                    Designed and Developed by
+                    <a href="https://www.epsumlabs.com" target="_blank">Epsum Labs</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Core -->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/popper/popper.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/vendor/headroom/headroom.min.js' %}"></script>
+<!-- Argon JS -->
+<script src="{% static 'assets/js/argon.js' %}"></script>
+</body>
+
+</html>

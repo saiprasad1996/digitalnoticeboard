@@ -1,0 +1,91 @@
+{% extends 'noticeboard/base_inner.html' %}
+{% block profile %}
+
+<main class="profile-page">
+    <section class="section-profile-cover section-shaped my-0">
+        <!-- Circles background -->
+        <div class="shape shape-style-1 shape-primary alpha-4">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="card card-profile shadow mt--300">
+                <div class="px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+
+                        </div>
+                        {% if is_admin %}
+                        <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
+                            <div class="card-profile-actions py-4 mt-lg-0">
+                                <a target="_blank" href="{% url 'register' %}" class="btn btn-sm btn-info mr-4">Add
+                                    user</a>
+                                <!-- <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <div class="text-center mt-5">
+                        <h3>{{name}}</h3>
+
+                        <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{designation}}</div>
+                        <div><i class="ni education_hat mr-2"></i>{{department}}</div>
+                        <div><i class="ni education_hat mr-2"></i>{{email}}</div>
+                    </div>
+                    <div class="mt-5 py-5 border-top text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-9">
+                                <form role="form">
+                                    <div class="form-group mb-3">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-lock-circle-open"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Current Password" name="password"
+                                                   type="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="ni ni-lock-circle-open"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="New Password" name="password"
+                                                   type="password">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-primary my-4">Change Password</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

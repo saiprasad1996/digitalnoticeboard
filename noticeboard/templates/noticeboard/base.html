@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Digital Notice Board">
+    <meta name="author" content="Sai Prasad, Epsum Labs">
+    <title>Digital Notice board</title>
+    <!-- Favicon -->
+    <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Icons -->
+    <link href="{% static 'assets/vendor/nucleo/css/nucleo.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Argon CSS -->
+    <link type="text/css" href="{% static 'assets/css/argon.css' %}" rel="stylesheet">
+    <!--Normalize CSS-->
+    <link type="text/css" href="{% static 'assets/css/normalize.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<header class="header-global">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
+        <div class="container">
+            <a class="navbar-brand mr-lg-5" href="{% url 'index' %}">
+                <h5 style="color:white;">Digital Notice board</h5>
+            </a>
+
+        </div>
+    </nav>
+</header>
+
+
+{% block login %}
+{% endblock %}
+{% block register %}
+{% endblock %}
+{% block profile %}
+{% endblock %}
+{% block privacy %}
+{% endblock %}
+
+<footer class="footer">
+    <div class="container">
+        <div class="row row-grid align-items-center mb-5">
+            <div class="col-lg-6">
+                <h3 class="text-primary font-weight-light mb-2">Thank you for using Digital Notice Board!</h3>
+            </div>
+
+        </div>
+        <hr>
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-6">
+                <div class="copyright">
+                    Designed and Developed by
+                    <a href="https://www.epsumlabs.com" target="_blank">Epsum Labs</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Core -->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/popper/popper.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/vendor/headroom/headroom.min.js' %}"></script>
+<!-- Argon JS -->
+<script src="{% static 'assets/js/argon.js' %}"></script>
+</body>
+
+</html>
