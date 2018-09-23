@@ -102,13 +102,13 @@ def approve(request):
     name = request.session.get('name')
     if request.method == "GET" and username is not None and name is not None:
         users = User.objects.filter(is_approved=False)
-        if len(users) == 0:
-            return render(request, 'noticeboard/approval.html',
-                          {"users": users, "message": "No users pending for approval"})
         admin = User.objects.filter(email=username)[0]
         if not admin.is_admin:
             return render(request, 'noticeboard/approval.html',
                           {"users": [], "message": "Sorry you cannot approve users. Please contact the admin"})
+        if len(users) == 0:
+            return render(request, 'noticeboard/approval.html',
+                          {"users": users, "message": "No users pending for approval"})
 
         return render(request, 'noticeboard/approval.html', {"users": users})
     elif request.method == "POST" and username is not None and name is not None:
