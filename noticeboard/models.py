@@ -1,7 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
+from django.utils.datetime_safe import datetime
+
+
 class Department(models.Model):
     department_id = models.CharField(max_length=30, primary_key=True)
     department_name = models.CharField(max_length=30)
@@ -28,6 +30,7 @@ class Posts(models.Model):
     notice_text = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=datetime.now())
 
     def __str__(self):
         return str(self.title)

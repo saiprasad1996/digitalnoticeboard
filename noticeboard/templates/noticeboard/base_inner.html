@@ -68,7 +68,8 @@
                                             the Digital Notice board</p>
                                     </div>
                                 </a>
-                                <a href="#"
+
+                                <a href="{% url 'approve' %}"
                                    class="media d-flex align-items-center">
                                     <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
                                         <i class="ni ni-palette"></i>
@@ -79,6 +80,7 @@
                                             users to post notices on Digital Notice Board</p>
                                     </div>
                                 </a>
+
                                 <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html"
                                    class="media d-flex align-items-center">
                                     <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
@@ -125,6 +127,8 @@
 {% block profile %}
 {% endblock %}
 {% block feed %}
+{% endblock %}
+{% block approve %}
 {% endblock %}
 
 

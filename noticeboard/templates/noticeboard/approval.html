@@ -1,0 +1,68 @@
+{% extends 'noticeboard/base_inner.html' %}
+{% block approve %}
+
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+
+        <section class="section section-lg section-shaped pb-250">
+            <div class="shape shape-style-1 shape-default">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="container py-lg-md d-flex">
+                <div class="col px-0">
+                    {% if message %}
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body">
+                            <div class="d-flex px-8">
+                                <div style="text-align:center;">
+                                    <p>{{message}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% for u in users %}
+
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body">
+                            <div class="d-flex px-12">
+                                <div>
+                                    <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                                        <i class="ni ni-satisfied"></i>
+                                    </div>
+                                </div>
+                                <form action="{% url 'approve' %}" method="post" class="pl-4">{% csrf_token %}
+                                    <h5 class="title text-success">{{u.name}}</h5>
+                                    <input hidden required name="username" value="{{u.email}}">
+                                    <p>{{u.designation}}</p>
+                                    <button type="submit" class="btn btn-success">
+                                        Approve
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <section class="section section-lg pt-0">
+                        <div class="container">
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+
+{% endblock %}

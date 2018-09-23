@@ -87,7 +87,7 @@ def registerUser(request):
             user = User(name=name, designation=designation,
                         department=department,
                         email=email,
-                        password=password)
+                        password=base64ofsha(password))
             user.save(force_insert=True)
             return render(request, 'noticeboard/register.html',
                           {"type": "success", "message": "Registration Successful", "departments": departments})
@@ -97,11 +97,35 @@ def registerUser(request):
                            "departments": departments})
 
 
+def approve(request):
+    username = request.session.get('username')
+    name = request.session.get('name')
+    if request.method == "GET" and username is not None and name is not None:
+        users = User.objects.filter(is_approved=False)
+        if len(users) == 0:
+            return render(request, 'noticeboard/approval.html',
+                          {"users": users, "message": "No users pending for approval"})
+        admin = User.objects.filter(email=username)[0]
+        if not admin.is_admin:
+            return render(request, 'noticeboard/approval.html',
+                          {"users": [], "message": "Sorry you cannot approve users. Please contact the admin"})
+
+        return render(request, 'noticeboard/approval.html', {"users": users})
+    elif request.method == "POST" and username is not None and name is not None:
+        user = User.objects.filter(email=request.POST["username"])[0]
+        user.is_approved = True
+        user.save(force_update=True)
+        return redirect('approve')
+    else:
+        return redirect('login')
+
+
 def logout(request):
     try:
         del request.session['username']
+        del request.session["name"]
     except:
-        pass
+        return redirect('login')
     return redirect('login')
 
 
