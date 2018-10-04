@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^register$', view=views.registerUser, name='register'),
     url(r'^privacy$', view=views.privacy, name='privacy'),
     url(r'^approve$', view=views.approve, name='approve'),
+    url(r'^changepassword$', view=views.change_password, name='changepassword'),
 
 ]
