@@ -1,5 +1,5 @@
 {% extends 'noticeboard/base_inner.html' %}
-{% block feed %}
+{% block panel %}
 
 <main>
     <div class="position-relative">
@@ -84,11 +84,15 @@
                                         <!--<span class="badge badge-pill badge-primary">system</span>-->
                                         <!--<span class="badge badge-pill badge-primary">creative</span>-->
                                     </div>
-                                    <a href="#" class="btn btn-primary mt-4" data-id="{{p.id}}" data-toggle="modal"
+                                    <a href="#" id="edit" class="btn btn-primary mt-4" data-id="{{p.id}}"
+                                       data-value="{{p.title}}"
+                                       data-content="{{p.notice_text}}"
+                                       data-toggle="modal"
                                        data-target="#modal-edit">Edit</a>
 
-                                    <a href="#" class="btn btn-danger mt-4"
+                                    <a href="#" id="delete" class="btn btn-danger mt-4"
                                        data-toggle="modal"
+                                       data-id="{{p.id}}"
                                        data-target="#modal-delete">Delete</a>
                                 </div>
                             </div>
@@ -107,22 +111,27 @@
          aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-delete">Are you sure want
-                        to delete the
-                        notice ? </h6>
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
+                <form action="{% url 'post' %}" method="post">{% csrf_token %}
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-delete">Are you sure want
+                            to delete the
+                            notice ? </h6>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Yes</button>
-                    <button type="button" class="btn btn-link  ml-auto"
-                            data-dismiss="modal">Close
-                    </button>
-                </div>
+                        <input type="text" hidden value="" id="post_del_id" name="post_id">
+                        <input type="text" hidden value="delete" name="req_type">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-link  ml-auto"
+                                data-dismiss="modal">Close
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -132,23 +141,29 @@
          aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-edit">Edit Notice</h6>
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body-edit">
-                    <form>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Done</button>
-                    <button type="button" class="btn btn-link  ml-auto"
-                            data-dismiss="modal">Cancel
-                    </button>
-                </div>
+                <form method="post" action="{% url 'post' %}">{% csrf_token %}
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-edit">Edit Notice</h6>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-body-edit">
+
+                        <h3 id="post_title"></h3>
+                        <input name="post_id" id="post_id" value="" hidden>
+                        <input name="req_type" value="edit" hidden>
+                        <textarea class="form-control" required id="content_editor" name="content"></textarea>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Done</button>
+                        <button type="button" class="btn btn-link  ml-auto"
+                                data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -156,10 +171,60 @@
 </main>
 <script type="text/javascript">
     $(document).ready(function(){
-        console.log("Ready");
+        $(document).on('click','#edit',function(e){
+            var edit_id = $(this).data('id');
+            var edit_title = $(this).data('value');
+            var edit_content = $(this).data('content');
+            $("#post_title").html(edit_title);
+            $("#content_editor").html(edit_content);
+            $("#post_id").val(edit_id);
 
-        function
+        });
+
+        $(document).on('click','#delete',function(e){
+            var delete_id = $(this).data('id');
+            $('#post_del_id').val(delete_id);
+        });
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

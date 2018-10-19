@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^privacy$', view=views.privacy, name='privacy'),
     url(r'^approve$', view=views.approve, name='approve'),
     url(r'^changepassword$', view=views.change_password, name='changepassword'),
+    url(r'^post$',view=views.post,name="post")
 
 ]

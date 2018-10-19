@@ -147,25 +147,26 @@ def logout(request):
     return redirect('login')
 
 
-@csrf_exempt
 def post(request):
-    if request.method == "GET":
-        return JsonResponse({"status": "failed", "message": "Operation not permitted"})
-    elif request.method == "POST":
-        s = getSessionDetails(request)
-        if s[0]:
-            try:
-                department = Department.objects.filter(request.POST["department"])[0]
-                title = request.POST["title"]
-                notice_text = request.POST["notice"]
-                user = User.objects.filter(email=s[1])[0]
-                p = Posts(title=title, notice_text=notice_text, user=user, department=department)
-                p.save()
-                return JsonResponse({"status": "success", "message": "Notice posted successfully"})
-            except IndexError:
-                return JsonResponse({"status": "failed", "message": "There was some error while posting the notice"})
+    username = request.session.get('username')
+    department = request.session.get('department')
+    if request.method == "POST" and username is not None and department is not None:
+        post_id = request.POST["post_id"]
+        req_type = request.POST["req_type"]
+        if req_type == 'delete':
+            post = Posts.objects.filter(id=post_id)[0]
+            post.delete()
+            return redirect('panel')
+        elif req_type == 'edit':
+            post = Posts.objects.filter(id=post_id)[0]
+            content_new = request.POST["content"]
+            post.notice_text = content_new
+            post.save(force_update=True)
+            return redirect('panel')
+        else:
+            return redirect('panel')
     else:
-        return JsonResponse({"status": "failed", "message": "Operation not permitted"})
+        return redirect('panel')
 
 
 def posts(request):
