@@ -203,3 +203,16 @@ def change_password(request):
                            "message": "Previous password does not match"})
     else:
         return redirect('logout')
+
+def board(request):
+    if request.method == "GET":
+        posts = Posts.objects.order_by('-id')[:10]
+        print(posts)
+        context= {"posts":posts,"sensor_data":[38.3,31.2, 0, 0, 0,26,0]}
+        if request.GET["type"]=="json":
+            posts_list = []
+            for p in posts :
+                posts_list.append({"title":p.title,"post_text":p.notice_text})
+            context["posts"]=posts_list
+            return JsonResponse(context)
+        return render(request,'noticeboard/board.html',context=context)

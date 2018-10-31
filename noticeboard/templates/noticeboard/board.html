@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Digital Notice Board</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/todc-bootstrap/3.3.7-3.3.13/css/bootstrap-theme.min.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <style>
+            .left-scroll{
+                padding:5px;
+                height: 800px;
+                width: 70%;
+                float:left;
+
+            }
+
+
+            .right-scroll{
+                padding:5px;
+                float:right;
+                width:30%;
+                height:800px;
+            }
+            .well-blue {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #66ADE3;
+    background-color: #DAA20D;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05)
+}
+
+.well-cust {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05)
+}
+
+.light-grey {
+    background: #F5F5F5;
+}
+
+.random-color {
+    background: #6FB2E7;
+}
+.jumbotron-cust {
+    padding: 30px 15px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #FFF1C4;
+}/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+
+    height: 65px;
+    background-color: #242B33;
+}
+.footer-index {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    
+    height: 60px;
+    background-color: #242B33;
+}
+#center {
+    text-align: center;
+    padding: 10px 10px 5px 10px
+}
+
+#logoutbtn {
+    padding: 0px 30px 0px 0px
+}
+
+#mid {
+    text-align: center;
+}
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+        </style>
+    </head>
+    <body>
+       
+
+
+        <div class="left-scroll" >
+            <marquee direction="up" height="800px">
+
+                <div class="well-cust">
+
+                   
+                       
+                        {% for p in posts %}
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">{{p.title}}</h2>
+                                <cite>&nbsp; &nbsp; -Posted by {{p.user.name}} on {{p.timestamp}}</cite>
+                            </div>
+                            <div class="panel-body">
+                                <blockquote>
+                                    {{p.notice_text}}
+                                </blockquote>
+                            </div>
+                            
+
+                                </div>
+                  {% endfor %}
+                        </div>
+                   
+                </div>
+
+
+            </marquee>
+        </div>
+        <!--<div class="right-scroll">
+            <div class="well-cust">
+                
+               {% for p in posts %}
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">{{p.title}}</h2>
+                            <cite>&nbsp; &nbsp; -Posted by {{p.user.name}} on {{p.timestamp}}</cite>
+                        </div>
+                        <div class="panel-body">
+                            <blockquote>
+                                {{p.notice_text}}
+                            </blockquote>
+                        </div>
+                        
+                            
+
+
+                            </div>
+                    {% endfor %}
+                        
+                    </div>
+              
+                    
+            </div>-->
+
+        <div class="right-scroll" style="margin-top:120px;">
+            <h2>Illumination - {{sensor_data1}}</h2>
+            <h2>Temp. - {{sensor_data}}</h2>
+            <h2>Humidity - {{sensor_data}}</h2>
+            
+        </div>
+
+
+
+    </body>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function(){
+            setInterval(function(){
+                console.log("Reloading");
+                window.location.reload();
+            },1000*60*3);
+        });    
+    </script>
+
+</html>
+
+
+
+
+
+</html>
