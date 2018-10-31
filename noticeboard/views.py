@@ -4,7 +4,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 from digitalnoticeboard.utils.utils import base64ofsha
 from .models import User, Posts, Department
-
+import requests
+import json
 
 def login(request):
     username = request.session.get("username")
@@ -208,7 +209,13 @@ def board(request):
     if request.method == "GET":
         posts = Posts.objects.order_by('-id')[:10]
         print(posts)
-        context= {"posts":posts,"temperature":"32 C","humidity":"60%","smoke":"0ppm"}
+        r = requests.get('http://things.epsumlabs.com/api/thing/r/hvGj-A5tIr6hn0TjfugBsg**')
+        print(r.text)
+        json_sensor=json.loads(r.text)
+        #{"data": [46.7, 26.3, 0, 0, 144, 66, 0], "status": "success", "records": 86406}
+        json_sensor=json_sensor["data"]
+        context= {"posts":posts,"temperature":str(json_sensor[1])+" C","humidity":str(json_sensor[0])+"%","smoke":str(json_sensor[3])+"ppm"}
+        print(context)
         if request.GET["type"]=="json":
             posts_list = []
             for p in posts :
