@@ -208,7 +208,7 @@ def board(request):
     if request.method == "GET":
         posts = Posts.objects.order_by('-id')[:10]
         print(posts)
-        context= {"posts":posts,"sensor_data":[38.3,31.2, 0, 0, 0,26,0]}
+        context= {"posts":posts,"temperature":"32 C","humidity":"60%","smoke":"0ppm"}
         if request.GET["type"]=="json":
             posts_list = []
             for p in posts :
