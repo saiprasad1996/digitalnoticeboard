@@ -7,6 +7,7 @@ from .models import User, Posts, Department
 import requests
 import json
 
+
 def login(request):
     username = request.session.get("username")
     department = request.session.get("department")
@@ -205,21 +206,24 @@ def change_password(request):
     else:
         return redirect('logout')
 
+
 def board(request):
     if request.method == "GET":
-        posts = Posts.objects.order_by('-id')[:10]
+        department = request.GET.get('dept', 'ece')
+        posts = Posts.objects.filter(department=department).order_by('-id')[:10]
         print(posts)
         r = requests.get('http://things.epsumlabs.com/api/thing/r/hvGj-A5tIr6hn0TjfugBsg**')
         print(r.text)
-        json_sensor=json.loads(r.text)
-        #{"data": [46.7, 26.3, 0, 0, 144, 66, 0], "status": "success", "records": 86406}
-        json_sensor=json_sensor["data"]
-        context= {"posts":posts,"temperature":str(json_sensor[1])+" C","humidity":str(json_sensor[0])+"%","smoke":str(json_sensor[3])+"ppm"}
+        json_sensor = json.loads(r.text)
+        # {"data": [46.7, 26.3, 0, 0, 144, 66, 0], "status": "success", "records": 86406}
+        json_sensor = json_sensor["data"]
+        context = {"posts": posts, "temperature": str(json_sensor[1]) + " C", "humidity": str(json_sensor[0]) + "%",
+                   "smoke": str(json_sensor[3]) + "ppm"}
         print(context)
-        if request.GET["type"]=="json":
+        if request.GET.get('type', 'page') == "json":
             posts_list = []
-            for p in posts :
-                posts_list.append({"title":p.title,"post_text":p.notice_text})
-            context["posts"]=posts_list
+            for p in posts:
+                posts_list.append({"title": p.title, "post_text": p.notice_text})
+            context["posts"] = posts_list
             return JsonResponse(context)
-        return render(request,'noticeboard/board.html',context=context)
+        return render(request, 'noticeboard/board.html', context=context)
