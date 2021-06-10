@@ -1,4 +1,4 @@
-Django==2.1.5
+Django==2.2.24
 django-webpack-loader==0.6.0
 pytz==2018.5
 whitenoise==3.3.0
